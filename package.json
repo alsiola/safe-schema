@@ -1,0 +1,26 @@
+{
+  "name": "safe-schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alsiola/safe-schema.git"
+  },
+  "author": "Alex Young",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alsiola/safe-schema/issues"
+  },
+  "homepage": "https://github.com/alsiola/safe-schema#readme",
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "graphql": "^14.6.0"
+  }
+}
