@@ -1,6 +1,15 @@
 import * as s from "../src";
 
-const user = s.object<{ name: string }>({
+const ageInput = s.inputObject({
+    name: "AgeInput",
+    fields: {
+        id: s.inputField({
+            type: s.integer()
+        })
+    }
+});
+
+const user = s.object<{ name: string }>()({
     name: "User",
     fields: {
         name: s.field({
@@ -9,13 +18,13 @@ const user = s.object<{ name: string }>({
         age: s.field({
             type: s.integer(),
             args: {
-                id: s.inputField({
-                    type: s.integer()
+                input: s.inputField({
+                    type: ageInput
                 })
             },
             resolve: (root, args) => {
-                console.log(args.id + root.name);
-                return args.id;
+                console.log(args.input.id + root.name);
+                return args.input.id;
             }
         })
     }

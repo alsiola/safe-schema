@@ -1,8 +1,6 @@
 import {
     GraphQLFieldConfig,
-    GraphQLOutputType,
     GraphQLFieldResolver,
-    GraphQLFieldConfigArgumentMap,
     GraphQLArgumentConfig,
     GraphQLScalarType,
     GraphQLResolveInfo
@@ -10,7 +8,8 @@ import {
 import { Brand } from "../util/brand";
 import { String, Integer } from "../scalars";
 import { InputField, InputOpts } from "./input-field";
-import { OutputType, Object } from "../output";
+import { OutputType, MapOutputType } from "../output";
+import { InputObject } from "../input";
 
 export type Field<TArgs, TRoot> = Brand<
     GraphQLFieldConfig<TRoot, {}, TArgs>,
@@ -23,17 +22,11 @@ export type MapArgsType<TArgs extends Record<string, GraphQLArgumentConfig>> = {
             ? string
             : U extends Integer
             ? number
+            : U extends InputObject<infer F>
+            ? MapArgsType<F>
             : never
         : never;
 };
-
-export type MapOutputType<TOut extends OutputType> = TOut extends String
-    ? string
-    : TOut extends Integer
-    ? number
-    : TOut extends Object
-    ? {}
-    : never;
 
 export type Resolver<TRoot, TArgs, TContext, TOutput> = (
     root: TRoot,

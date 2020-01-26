@@ -1,18 +1,19 @@
-import {
-    GraphQLObjectType,
-    GraphQLObjectTypeConfig,
-    Thunk,
-    GraphQLFieldConfigMap
-} from "graphql";
+import { GraphQLObjectType } from "graphql";
 import { Brand } from "../util/brand";
 import { Field } from "../schema/field";
 
-export interface ObjectConfig<TRoot> {
+export interface ObjectConfig<
+    TRoot,
+    TFields extends Record<string, Field<{}, TRoot>>
+> {
     name: string;
-    fields: Record<string, Field<{}, TRoot>>;
+    fields: TFields;
 }
 
 export type Object = Brand<GraphQLObjectType, "GRAPHQL_OBJECT">;
 
-export const object = <TRoot>(opts: ObjectConfig<TRoot>): Object =>
-    new GraphQLObjectType(opts);
+export const object = <TRoot>() => <
+    TFields extends Record<string, Field<{}, TRoot>>
+>(
+    opts: ObjectConfig<TRoot, TFields>
+): Object => new GraphQLObjectType(opts);
