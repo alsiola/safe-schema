@@ -6,7 +6,7 @@ import {
     GraphQLResolveInfo
 } from "graphql";
 import { Brand } from "../util/brand";
-import { String, Integer } from "../scalars";
+import { String, Integer, Boolean } from "../scalars";
 import { InputField, InputOpts } from "./input-field";
 import { OutputType, MapOutputType } from "../output";
 import { InputObject } from "../input";
@@ -22,6 +22,8 @@ export type MapArgsType<TArgs extends Record<string, GraphQLArgumentConfig>> = {
             ? string
             : U extends Integer
             ? number
+            : U extends Boolean
+            ? boolean
             : U extends InputObject<infer F>
             ? MapArgsType<F>
             : never

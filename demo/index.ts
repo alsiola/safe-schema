@@ -5,6 +5,9 @@ const ageInput = s.inputObject({
     fields: {
         id: s.inputField({
             type: s.integer()
+        }),
+        test: s.inputField({
+            type: s.boolean()
         })
     }
 });
